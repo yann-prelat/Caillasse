@@ -1,0 +1,220 @@
+/* ===========================
+   Font-face
+=========================== */
+@font-face {
+  font-family: 'Drakeide';
+  src: url('../fonts/Drakeide-Sf.otf') format('opentype');
+}
+@font-face {
+  font-family: 'Calvus';
+  src: url('../fonts/Calvus.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Schwarzy';
+  src: url('../fonts/Schwarzy-Black.otf') format('opentype');
+}
+@font-face {
+  font-family: 'EBGaramondCustom';
+  src: url('../fonts/EBGaramond-Bold.tt') format('truetype');
+}
+
+/* ===========================
+   Variables
+=========================== */
+:root {
+  --fg: #fff;
+  --bg-color: #000; /* mode noir par défaut */
+}
+
+/* ===========================
+   Base
+=========================== */
+body {
+  background: var(--bg-color);
+  color: var(--fg);
+  font-family: 'EBGaramondCustom', serif;
+  transition: background 1.2s ease;
+}
+
+.page {
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr;
+  width: 100%;
+}
+
+/* ===========================
+   Aa fixes (gauche)
+=========================== */
+.left-spot {
+  position: fixed;
+  top: 0;
+  left: 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  height: 100vh;
+  justify-content: center;
+}
+
+.spot-item {
+  border: 1.5px solid var(--fg);
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.spot-item .aa {
+  font-size: 64px;
+}
+
+.spot-item[data-font="Drakéide Sf"] .aa { font-family: 'Drakeide'; }
+.spot-item[data-font="Calvus"] .aa { font-family: 'Calvus'; }
+.spot-item[data-font="Schwarzy Black"] .aa { font-family: 'Schwarzy'; }
+
+.spot-item .label {
+  margin-top: 8px;
+  font-size: 16px;
+  font-family: 'EBGaramondCustom';
+}
+
+/* ===========================
+   Boutons modes couleurs
+=========================== */
+.color-mode {
+  margin-top: 35px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.color-btn {
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--fg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  cursor: pointer;
+  font-family: 'EBGaramondCustom';
+}
+
+.color-btn.black {
+  background: #000;
+  color: #fff;
+}
+
+.color-btn.white {
+  background: #fff;
+  color: #000;
+  border: 1px solid #000;
+}
+
+.color-btn.rainbow {
+  background: linear-gradient(90deg, #fe642e, #274AB3, #fdc841);
+  background-size: 300% 300%;
+  animation: rainbow 3s linear infinite;
+  color: #fff;
+}
+
+.color-btn.rainbow.dark {
+  color: #000;
+  border: 1px solid #000; /* contour noir demandé */
+}
+
+@keyframes rainbow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ===========================
+   Blocs polices
+=========================== */
+.main-grid {
+  margin-left: 25%;
+  margin-right: 10%;
+  display: flex;
+  flex-direction: column;
+  gap: 120px;
+  padding-top: 20vh;
+  padding-bottom: 200px;
+  scroll-behavior: smooth;
+}
+
+.font-block {
+  border: 1.5px solid var(--fg);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.meta-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.font-name {
+  font-size: 16px;
+  font-family: 'EBGaramondCustom';
+}
+
+.download-area {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.download-link {
+  text-decoration: underline;
+  font-size: 16px;
+  color: var(--fg);
+}
+
+/* Icône ▼ dans le texte déjà inclus, donc pas d’image */
+
+/* Nom + alphabet */
+.large-name {
+  font-size: 150px;
+}
+
+.alphabet .alpha-line {
+  font-size: 40px;
+  line-height: 1.2;
+  white-space: normal;
+  word-wrap: break-word;
+}
+
+/* ===========================
+   Contact (fixe en bas droite)
+=========================== */
+.contact-strip {
+  position: fixed;
+  right: 80px;
+  bottom: 0;
+  height: 100px;
+  background: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 12px;
+  text-align: right;
+  transition: background 1.2s ease;
+}
+
+.contact-inner p {
+  font-size: 16px;
+  line-height: 1.2;
+}
+
+.contact-inner a {
+  color: var(--fg);
+  text-decoration: underline;
+}
