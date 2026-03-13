@@ -5,21 +5,25 @@
   font-family: 'Drakeide';
   src: url('../fonts/Drakeide-Sf.otf') format('opentype');
 }
+
 @font-face {
   font-family: 'Calvus';
   src: url('../fonts/Calvus.ttf') format('truetype');
 }
+
 @font-face {
   font-family: 'Schwarzy';
   src: url('../fonts/Schwarzy-Black.otf') format('opentype');
 }
+
 @font-face {
   font-family: 'EBGaramondCustom';
-  src: url('../fonts/EBGaramond-Bold.tt') format('truetype');
+  src: url('../fonts/EBGaramond-Bold.ttf') format('truetype');
 }
+
 @font-face {
   font-family: 'Nelumbo';
-  src: url('../fonts/Nelumbo-Regular.tt') format('truetype');
+  src: url('../fonts/Nelumbo-Regular.ttf') format('truetype');
 }
 
 
@@ -28,8 +32,9 @@
 =========================== */
 :root {
   --fg: #fff;
-  --bg-color: #000; /* mode noir par défaut */
+  --bg-color: #000;
 }
+
 
 /* ===========================
    Base
@@ -51,6 +56,7 @@ body {
   grid-template-columns: 1fr;
   width: 100%;
 }
+
 
 /* ===========================
    Aa fixes (gauche)
@@ -77,16 +83,28 @@ body {
   font-size: 64px;
 }
 
-.spot-item[data-font="Drakéide Sf"] .aa { font-family: 'Drakeide'; }
-.spot-item[data-font="Calvus"] .aa { font-family: 'Calvus'; }
-.spot-item[data-font="Schwarzy Black"] .aa { font-family: 'Schwarzy'; }
-.spot-item[data-font="Nelumbo Regular"] .aa { font-family: 'Nelumbo'; }
+.spot-item[data-font="Drakéide Sf"] .aa {
+  font-family: 'Drakeide';
+}
+
+.spot-item[data-font="Calvus"] .aa {
+  font-family: 'Calvus';
+}
+
+.spot-item[data-font="Schwarzy Black"] .aa {
+  font-family: 'Schwarzy';
+}
+
+.spot-item[data-font="Nelumbo"] .aa {
+  font-family: 'Nelumbo';
+}
 
 .spot-item .label {
   margin-top: 8px;
   font-size: 16px;
   font-family: 'EBGaramondCustom';
 }
+
 
 /* ===========================
    Boutons modes couleurs
@@ -130,7 +148,7 @@ body {
 
 .color-btn.rainbow.dark {
   color: #000;
-  border: 1px solid #000; /* contour noir demandé */
+  border: 1px solid #000;
 }
 
 @keyframes rainbow {
@@ -138,6 +156,7 @@ body {
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
+
 
 /* ===========================
    Blocs polices
@@ -184,9 +203,10 @@ body {
   color: var(--fg);
 }
 
-/* Icône ▼ dans le texte déjà inclus, donc pas d’image */
 
-/* Nom + alphabet */
+/* ===========================
+   Nom + alphabet
+=========================== */
 .large-name {
   font-size: 150px;
 }
@@ -197,6 +217,7 @@ body {
   white-space: normal;
   word-wrap: break-word;
 }
+
 
 /* ===========================
    Contact (fixe en bas droite)
@@ -220,6 +241,10 @@ body {
   line-height: 1.2;
 }
 
+.contact-inner a {
+  color: var(--fg);
+  text-decoration: underline;
+}
 .contact-inner a {
   color: var(--fg);
   text-decoration: underline;
