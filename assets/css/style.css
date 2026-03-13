@@ -17,6 +17,11 @@
   font-family: 'EBGaramondCustom';
   src: url('../fonts/EBGaramond-Bold.tt') format('truetype');
 }
+@font-face {
+  font-family: 'Nelumbo';
+  src: url('../fonts/Nelumbo-Regular.tt') format('truetype');
+}
+
 
 /* ===========================
    Variables
