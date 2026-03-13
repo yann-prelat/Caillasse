@@ -75,7 +75,7 @@ body {
 .spot-item[data-font="Drakéide Sf"] .aa { font-family: 'Drakeide'; }
 .spot-item[data-font="Calvus"] .aa { font-family: 'Calvus'; }
 .spot-item[data-font="Schwarzy Black"] .aa { font-family: 'Schwarzy'; }
-.spot-item[data-font="Nelumbo"] .aa { font-family: 'Nelumbo'; }
+.spot-item[data-font="Nelumbo Regular"] .aa { font-family: 'Nelumbo'; }
 
 .spot-item .label {
   margin-top: 8px;
