@@ -1,75 +1,76 @@
 // =========================
-// Scroll fluide depuis les Aa
+// Scroll fluide depuis la navigation
 // =========================
 document.querySelectorAll('.spot-item').forEach(item => {
   item.addEventListener('click', () => {
-
     const map = {
       "Drakéide Sf": "drakeide",
       "Calvus": "calvus",
       "Schwarzy Black": "schwarzy",
-      "Nelumbo": "nelumbo"
+      "Nelumbo": "nelumbo",
+      "Apô": "apo"
     };
 
     const target = document.getElementById(map[item.dataset.font]);
-
     if (target) {
-      target.scrollIntoView({
-        behavior: "smooth",
-        block: "center"
+      // Calcul avec décalage de sécurité pour le header supérieur fixe
+      const headerOffset = window.innerWidth <= 900 ? 80 : 110;
+      const bodyRect = document.body.getBoundingClientRect().top;
+      const targetRect = target.getBoundingClientRect().top;
+      const targetPosition = targetRect - bodyRect - headerOffset;
+
+      window.scrollTo({
+        top: targetPosition,
+        behavior: "smooth"
       });
     }
   });
 });
 
-
 // =========================
 // MODES COULEUR
 // =========================
-let mode = "black"; // mode par défaut
+let mode = "black"; 
 const body = document.body;
-const contact = document.querySelector('.contact-strip');
 const sections = document.querySelectorAll('.font-block');
+const topHeader = document.querySelector('.top-header');
+const navBar = document.querySelector('.left-spot');
 
 function applyMode(color = null) {
-
-  // MODE NOIR
   if (mode === "black") {
     body.style.backgroundColor = "#000";
-    contact.style.backgroundColor = "#000";
-    body.style.color = "#fff";
+    if (topHeader) topHeader.style.backgroundColor = "#000";
+    if (navBar && window.innerWidth <= 900) navBar.style.backgroundColor = "#000";
+    document.documentElement.style.setProperty("--bg-color", "#000");
     document.documentElement.style.setProperty("--fg", "#fff");
   }
 
-  // MODE BLANC
   if (mode === "white") {
     body.style.backgroundColor = "#fff";
-    contact.style.backgroundColor = "#fff";
-    body.style.color = "#000";
+    if (topHeader) topHeader.style.backgroundColor = "#fff";
+    if (navBar && window.innerWidth <= 900) navBar.style.backgroundColor = "#fff";
+    document.documentElement.style.setProperty("--bg-color", "#fff");
     document.documentElement.style.setProperty("--fg", "#000");
   }
 
-  // MODE DYNAMIQUE
   if (mode === "dynamic-light" || mode === "dynamic-dark") {
-
     if (color) {
       body.style.backgroundColor = color;
-      contact.style.backgroundColor = color;
+      if (topHeader) topHeader.style.backgroundColor = color;
+      if (navBar && window.innerWidth <= 900) navBar.style.backgroundColor = color;
+      document.documentElement.style.setProperty("--bg-color", color);
     }
 
     if (mode === "dynamic-light") {
-      body.style.color = "#fff";
       document.documentElement.style.setProperty("--fg", "#fff");
     } else {
-      body.style.color = "#000";
       document.documentElement.style.setProperty("--fg", "#000");
     }
   }
 }
 
-
 // =========================
-// BOUTONS
+// ÉVÉNEMENTS BOUTONS MODE
 // =========================
 document.getElementById('btn-black').addEventListener('click', () => {
   mode = "black";
@@ -83,25 +84,19 @@ document.getElementById('btn-white').addEventListener('click', () => {
 
 document.getElementById('btn-dynamic').addEventListener('click', () => {
   mode = "dynamic-light";
-
-  // applique immédiatement la couleur du bloc visible
   triggerDynamicColor();
 });
 
 document.getElementById('btn-rainbow-dark').addEventListener('click', () => {
   mode = "dynamic-dark";
-
   triggerDynamicColor();
 });
 
-
 // =========================
-// Détection section visible
+// Détection de la section active au scroll
 // =========================
 function triggerDynamicColor() {
-
   let middle = window.innerHeight / 2;
-
   sections.forEach(section => {
     const rect = section.getBoundingClientRect();
     if (rect.top <= middle && rect.bottom >= middle) {
@@ -110,13 +105,14 @@ function triggerDynamicColor() {
   });
 }
 
+let isScrolling;
 window.addEventListener('scroll', () => {
   if (!mode.startsWith("dynamic")) return;
-  triggerDynamicColor();
+  window.cancelAnimationFrame(isScrolling);
+  isScrolling = window.requestAnimationFrame(() => {
+    triggerDynamicColor();
+  });
 });
 
-
-// =========================
-// Initialisation au chargement
-// =========================
+// Initialisation globale
 applyMode();
