@@ -5,27 +5,26 @@
   font-family: 'Drakeide';
   src: url('../fonts/Drakeide-Sf.otf') format('opentype');
 }
-
 @font-face {
   font-family: 'Calvus';
   src: url('../fonts/Calvus.ttf') format('truetype');
 }
-
 @font-face {
   font-family: 'Schwarzy';
   src: url('../fonts/Schwarzy-Black.otf') format('opentype');
 }
-
-@font-face {
-  font-family: 'EBGaramondCustom';
-  src: url('../fonts/EBGaramond-Bold.ttf') format('truetype');
-}
-
 @font-face {
   font-family: 'Nelumbo';
   src: url('../fonts/Nelumbo-Regular.ttf') format('truetype');
 }
-
+@font-face {
+  font-family: 'Apo';
+  src: url('../fonts/Apo-Regular.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'EBGaramondCustom';
+  src: url('../fonts/EBGaramond-Bold.ttf') format('truetype');
+}
 
 /* ===========================
    Variables
@@ -35,121 +34,167 @@
   --bg-color: #000;
 }
 
-
 /* ===========================
    Base
 =========================== */
+* {
+  box-sizing: border-box;
+}
+
 body {
   background: var(--bg-color);
   color: var(--fg);
   font-family: 'EBGaramondCustom', serif;
-  transition: background 1.2s ease;
+  transition: background 0.8s ease, color 0.8s ease;
+  margin: 0;
+  padding: 0;
 }
 
 .page {
   display: flex;
   justify-content: center;
+  width: 100%;
 }
 
 .container {
   display: grid;
   grid-template-columns: 1fr;
   width: 100%;
+  max-width: 1600px;
 }
 
+/* ===========================
+   Liseré Supérieur Fixe (Header)
+=========================== */
+.top-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  background: var(--bg-color);
+  border-bottom: 1px solid var(--fg);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40px;
+  z-index: 200;
+  transition: background 0.8s ease, border-color 0.5s ease;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+.portfolio-btn {
+  display: inline-block;
+  border: 1.5px solid var(--fg);
+  padding: 8px 18px;
+  color: var(--fg);
+  text-decoration: none;
+  font-family: 'EBGaramondCustom';
+  font-size: 15px;
+  transition: background-color 0.3s, color 0.3s, border-color 0.5s;
+}
+
+.portfolio-btn:hover {
+  background-color: var(--fg);
+  color: var(--bg-color);
+}
+
+.header-right p {
+  font-size: 14px;
+  margin: 0;
+  font-family: 'EBGaramondCustom';
+}
+
+.header-right a {
+  color: var(--fg);
+  text-decoration: underline;
+}
 
 /* ===========================
-   Aa fixes (gauche)
+   Navigation Latérale Gauche
 =========================== */
 .left-spot {
   position: fixed;
-  top: 0;
-  left: 80px;
+  top: 70px; /* Aligné juste en dessous du header fixe */
+  left: 40px;
   display: flex;
   flex-direction: column;
-  gap: 40px;
-  height: 100vh;
+  gap: 20px;
+  height: calc(100vh - 70px);
   justify-content: center;
+  z-index: 100;
+}
+
+.spot-items-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 .spot-item {
   border: 1.5px solid var(--fg);
-  padding: 20px;
+  padding: 12px 18px;
   text-align: center;
   cursor: pointer;
+  background: transparent;
+  transition: transform 0.2s ease, border-color 0.5s ease;
+}
+
+.spot-item:hover {
+  transform: scale(1.03);
 }
 
 .spot-item .aa {
-  font-size: 64px;
+  font-size: 38px;
+  line-height: 1;
 }
 
-.spot-item[data-font="Drakéide Sf"] .aa {
-  font-family: 'Drakeide';
-}
-
-.spot-item[data-font="Calvus"] .aa {
-  font-family: 'Calvus';
-}
-
-.spot-item[data-font="Schwarzy Black"] .aa {
-  font-family: 'Schwarzy';
-}
-
-.spot-item[data-font="Nelumbo"] .aa {
-  font-family: 'Nelumbo';
-}
+.spot-item[data-font="Drakéide Sf"] .aa { font-family: 'Drakeide'; }
+.spot-item[data-font="Calvus"] .aa { font-family: 'Calvus'; }
+.spot-item[data-font="Schwarzy Black"] .aa { font-family: 'Schwarzy'; }
+.spot-item[data-font="Nelumbo"] .aa { font-family: 'Nelumbo'; }
+.spot-item[data-font="Apô"] .aa { font-family: 'Apo'; }
 
 .spot-item .label {
-  margin-top: 8px;
-  font-size: 16px;
+  margin-top: 6px;
+  font-size: 13px;
   font-family: 'EBGaramondCustom';
 }
 
-
-/* ===========================
-   Boutons modes couleurs
-=========================== */
+/* Modes couleurs */
 .color-mode {
-  margin-top: 35px;
+  margin-top: 10px;
   display: flex;
-  gap: 10px;
+  gap: 8px;
   justify-content: center;
 }
 
 .color-btn {
-  width: 30px;
-  height: 30px;
+  width: 28px;
+  height: 28px;
   border: 1px solid var(--fg);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
+  font-size: 16px;
   cursor: pointer;
   font-family: 'EBGaramondCustom';
+  transition: border-color 0.5s ease;
 }
 
-.color-btn.black {
-  background: #000;
-  color: #fff;
-}
-
-.color-btn.white {
-  background: #fff;
-  color: #000;
-  border: 1px solid #000;
-}
-
+.color-btn.black { background: #000; color: #fff; border-color: #fff; }
+.color-btn.white { background: #fff; color: #000; border-color: #000; }
 .color-btn.rainbow {
   background: linear-gradient(90deg, #fe642e, #274AB3, #fdc841);
   background-size: 300% 300%;
   animation: rainbow 3s linear infinite;
   color: #fff;
 }
-
-.color-btn.rainbow.dark {
-  color: #000;
-  border: 1px solid #000;
-}
+.color-btn.rainbow.dark { color: #000; border: 1px solid #000; }
 
 @keyframes rainbow {
   0% { background-position: 0% 50%; }
@@ -157,27 +202,26 @@ body {
   100% { background-position: 0% 50%; }
 }
 
-
 /* ===========================
-   Blocs polices
+   Grille Principale
 =========================== */
 .main-grid {
-  margin-left: 25%;
-  margin-right: 10%;
+  margin-left: 280px;
+  margin-right: 60px;
   display: flex;
   flex-direction: column;
-  gap: 120px;
-  padding-top: 20vh;
-  padding-bottom: 200px;
-  scroll-behavior: smooth;
+  gap: 100px;
+  padding-top: 140px; /* Espace suffisant pour ne pas être caché par le header initialement */
+  padding-bottom: 100px;
 }
 
 .font-block {
   border: 1.5px solid var(--fg);
-  padding: 28px;
+  padding: 35px;
   display: flex;
   flex-direction: column;
   gap: 30px;
+  transition: border-color 0.5s ease;
 }
 
 .meta-row {
@@ -187,65 +231,82 @@ body {
 }
 
 .font-name {
-  font-size: 16px;
+  font-size: 18px;
   font-family: 'EBGaramondCustom';
-}
-
-.download-area {
-  display: flex;
-  gap: 12px;
-  align-items: center;
 }
 
 .download-link {
   text-decoration: underline;
   font-size: 16px;
   color: var(--fg);
+  transition: color 0.5s ease;
 }
 
-
-/* ===========================
-   Nom + alphabet
-=========================== */
 .large-name {
-  font-size: 150px;
+  font-size: 120px;
+  line-height: 1.1;
+  margin-bottom: 20px;
 }
 
 .alphabet .alpha-line {
-  font-size: 40px;
-  line-height: 1.2;
+  font-size: 32px;
+  line-height: 1.4;
   white-space: normal;
   word-wrap: break-word;
+  overflow-wrap: break-word;
 }
-
 
 /* ===========================
-   Contact (fixe en bas droite)
+   Responsive Design
 =========================== */
-.contact-strip {
-  position: fixed;
-  right: 80px;
-  bottom: 0;
-  height: 100px;
-  background: inherit;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  padding-right: 12px;
-  text-align: right;
-  transition: background 1.2s ease;
-}
+@media (max-width: 900px) {
+  .top-header {
+    position: static;
+    height: auto;
+    flex-direction: column;
+    padding: 15px;
+    gap: 15px;
+    text-align: center;
+  }
+  
+  .header-right p {
+    line-height: 1.4;
+  }
 
-.contact-inner p {
-  font-size: 16px;
-  line-height: 1.2;
-}
+  .left-spot {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px;
+    background: var(--bg-color);
+    border-bottom: 1px solid var(--fg);
+  }
 
-.contact-inner a {
-  color: var(--fg);
-  text-decoration: underline;
-}
-.contact-inner a {
-  color: var(--fg);
-  text-decoration: underline;
+  .spot-items-wrapper {
+    flex-direction: row;
+    gap: 8px;
+  }
+
+  .spot-item {
+    padding: 6px 10px;
+  }
+
+  .spot-item .aa { font-size: 22px; }
+  .spot-item .label { display: none; }
+
+  .main-grid {
+    margin-left: 20px;
+    margin-right: 20px;
+    padding-top: 30px;
+    gap: 50px;
+  }
+
+  .large-name {
+    font-size: 13vw;
+  }
 }
